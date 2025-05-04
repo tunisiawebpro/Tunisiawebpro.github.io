@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Trial Terms | YourWebDesignAgency</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Favicon (Matches Logo) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M8 1L1 4v3c0 5 5 8 7 10 2-2 7-5 7-10V4L8 1z' fill='%236366F1'/><path d='M8 1L1 4v1l7-2 7 2V4L8 1z' fill='%23E70013'/><path d='M5 9l-2-2-1 1 3 3 6-6-1-1-5 5z' fill='white'/></svg>">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if terms were already accepted
+            if (!localStorage.getItem('trial_terms_accepted')) {
+                // Show terms banner if not accepted yet
+                document.getElementById('terms-banner').style.display = 'block';
+            }
+            
+            // Set up all trial buttons
+            document.querySelectorAll('.trial-cta').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    if (!localStorage.getItem('trial_terms_accepted')) {
+                        e.preventDefault();
+                        if (confirm("You must agree to the terms first. Review them before continuing.")) {
+                            window.scrollTo({
+                                top: document.getElementById('terms-section').offsetTop,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --accent: #f59e0b;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        /* Logo Styles */
+        .logo-header {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem 0;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            width: fit-content;
+        }
+        
+        .logo-container:hover {
+            transform: translateY(-3px);
+        }
+        
+        .logo-svg {
+            width: 50px;
+            height: 50px;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-container:hover .logo-svg {
+            transform: rotate(-5deg) scale(1.1);
+        }
+        
+        .logo-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #f59e0b;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        /* Header */
+        .trial-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .trial-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -20%;
+            width: 70%;
+            height: 200%;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        
+        .trial-header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .trial-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .trial-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+        
+        .trial-cta {
+            display: inline-block;
+            background: white;
+            color: var(--primary);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        .trial-cta:hover {
+            transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+        .trial-cta:active {
+    transform: translateY(1px) scale(0.98);
+}
+        
+        /* Terms Content */
+        .terms-content {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 3rem;
+            margin: -50px auto 3rem;
+            position: relative;
+            max-width: 900px;
+        }
+        
+        .terms-section {
+            margin-bottom: 3rem;
+        }
+        
+        .terms-section h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f1f5f9;
+        }
+        
+        .terms-section h3 {
+            margin: 1.5rem 0 1rem;
+            color: var(--dark);
+        }
+        
+        .terms-section p, .terms-section ul {
+            margin-bottom: 1rem;
+            color: #64748b;
+        }
+        
+        .terms-section ul {
+            padding-left: 1.5rem;
+        }
+        
+        .terms-section li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .highlight-box {
+            background: #f8fafc;
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .trial-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .terms-content {
+                padding: 2rem;
+                margin-top: -30px;
+            }
+        }
+        /* Logo hover animation */
+.logo-container svg {
+  transition: transform 0.3s ease;
+}
+.logo-container:hover svg {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+/* Pulsing star in Option 1 */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+svg path[fill="#F59E0B"] {
+  animation: pulse 2s infinite;
+}
+.logo-svg path:nth-child(3) {
+  animation: checkBounce 1s ease;
+}
+@keyframes checkBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+    </style>
+</head>
+<body>
+    <!-- Clickable Logo Header -->
+    <header class="logo-header">
+        <a href="https://tunisiawebpro.github.io/" class="logo-container">
+            <!-- Animated SVG Logo -->
+            <svg class="logo-svg" viewBox="0 0 50 50">
+                <!-- Shield Base -->
+                <path d="M25 4L7 10v12c0 10 10 15 18 20 8-5 18-10 18-20V10L25 4z" fill="var(--primary)"/>
+                <!-- Tunisian Stripe -->
+                <path d="M25 4L7 10v3l18-4 18 4v-3L25 4z" fill="#E70013"/>
+                <!-- Checkmark -->
+                <path d="M18 28l-5-5-3 3 8 8 16-16-3-3-13 13z" fill="#fff"/>
+                <!-- Free Trial Badge -->
+                <circle cx="38" cy="12" r="6" fill="var(--accent)"/>
+                <text x="38" y="15" font-size="7" text-anchor="middle" fill="#fff" font-weight="bold">FT</text>
+            </svg>
+            
+            <!-- Text -->
+            <div>
+                <div style="font-size: 1.8rem; font-weight: 800; line-height: 1; position: relative;">
+                    <span style="color: var(--dark);">Tunisia</span>
+                    <span style="color: var(--primary);">Web</span>
+                    <span style="color: #E70013;">Pro</span>
+                    <div class="logo-badge">!</div>
+                </div>
+                <div style="color: #64748b; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase;">
+                    Free Trial Terms
+                </div>
+            </div>
+        </a>
+    </header>
+    <!-- Header -->
+    <header class="trial-header">
+        <div class="trial-header-content">
+            <h1>7-Day Free Trial Terms</h1>
+            <p>Understand how our risk-free trial works before getting started</p>
+                <a href="https://tunisiawebpro.github.io/" class="trial-cta" onclick="return confirmStartTrial()">
+                    <i class="fas fa-rocket"></i> Start Your Trial
+                </a>
+            </a>
+        </div>
+    </header>
+    <!-- Terms Content -->
+    <main class="container">
+        <div class="terms-content">
+            <div class="terms-section">
+                <h2>1. Trial Overview</h2>
+                <p>Our free trial allows you to experience our web design services with no upfront payment. Here's what you need to know:</p>
+                
+                <div class="highlight-box">
+                    <h3>What's Included:</h3>
+                    <ul>
+                        <li><i class="fas fa-check" style="color: var(--accent);"></i> 1 homepage concept design</li>
+                        <li><i class="fas fa-check" style="color: var(--accent);"></i> 2 rounds of revisions</li>
+                        <li><i class="fas fa-check" style="color: var(--accent);"></i> 7 days to evaluate the work</li>
+                        <li><i class="fas fa-check" style="color: var(--accent);"></i> Watermarked preview only</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="terms-section">
+                <h2>2. Eligibility</h2>
+                <h3>Who qualifies:</h3>
+                <ul>
+                    <li>New clients only (first project with us)</li>
+                    <li>Tunisia-based businesses</li>
+                    <li>Projects under 10 pages</li>
+                </ul>
+                
+                <h3>What's excluded:</h3>
+                <ul>
+                    <li>E-commerce functionality</li>
+                    <li>Custom web applications</li>
+                    <li>Enterprise projects</li>
+                </ul>
+            </div>
+
+            <div class="terms-section">
+                <h2>3. Trial Process</h2>
+                <ol>
+                    <li><strong>Submit request:</strong> Complete our trial application form</li>
+                    <li><strong>Kickoff call:</strong> 30-minute consultation to discuss your needs</li>
+                    <li><strong>Design phase:</strong> We deliver your concept within 3 business days</li>
+                    <li><strong>Review period:</strong> You have 4 days to request revisions or approve</li>
+                    <li><strong>Decision time:</strong> Choose to continue or walk away with no obligation</li>
+                </ol>
+            </div>
+
+            <div class="terms-section">
+                <h2>4. Ownership & Usage</h2>
+                <p><strong>During trial:</strong> All designs remain our property and include visible watermarks.</p>
+                <p><strong>After payment:</strong> Full ownership transfers to you upon project completion and final payment.</p>
+                
+                <div class="highlight-box">
+                    <h3>Important:</h3>
+                    <p>You may not use trial designs in production without purchasing the full project. Unauthorized use violates these terms.</p>
+                </div>
+            </div>
+
+            <div class="terms-section">
+                <h2>5. Conversion to Paid Project</h2>
+                <h3>If you continue:</h3>
+                <ul>
+                    <li>Trial work applies toward your total project cost</li>
+                    <li>We'll provide a detailed project proposal</li>
+                    <li>50% deposit required to begin development</li>
+                </ul>
+                
+                <h3>If you decline:</h3>
+                <ul>
+                    <li>No payment required</li>
+                    <li>We retain all design files</li>
+                    <li>You may request raw design files for a fee (200 TND)</li>
+                </ul>
+            </div>
+
+            <div class="terms-section">
+                <h2>6. Limitations</h2>
+                <ul>
+                    <li>One trial per business</li>
+                    <li>Maximum 2 revision rounds during trial</li>
+                    <li>No source files provided without payment</li>
+                    <li>Trial period cannot be extended</li>
+                </ul>
+            </div>
+
+            <div class="terms-section">
+                <h2>7. How to Start</h2>
+                <ol>
+                    <li>Read and agree to these terms</li>
+                    <li>Complete our trial application form</li>
+                    <li>Attend a 30-minute kickoff call</li>
+                    <li>Provide all required materials (logo, content, etc.)</li>
+                </ol>
+                
+                <a href="https://tunisiawebpro.github.io/#contact" class="trial-cta" style="display: inline-block; margin-top: 1.5rem;" onclick="return confirmStartTrial()">
+                    <i class="fas fa-file-signature"></i> Agree & Start Trial
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+    <script>
+        // Confirm before redirecting
+        function confirmStartTrial() {
+            const confirmed = confirm("By clicking OK, you agree to our Free Trial Terms and will be redirected to the application form.");
+            if (confirmed) {
+                // Optional: Track agreement (replace with your actual tracking)
+                localStorage.setItem('trial_terms_accepted', 'true');
+                
+                // Smooth scroll to top before redirect (optional)
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+                
+                // Small delay for better UX
+                setTimeout(() => {
+                    window.location.href = "https://tunisiawebpro.github.io/";
+                }, 500);
+                
+                return false;
+            }
+            return false;
+        }
+    
+        // Alternative: If you want to go to a specific section on homepage
+        function redirectToTrialForm() {
+            window.location.href = "https://tunisiawebpro.github.io/#contact";
+            return false;
+        }
+    </script>
+</body>
+</html>
