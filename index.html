@@ -6,6 +6,7 @@
     <title>TunisiaWebPro - Professional Web Design</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' fill='%23f8fafc'/><circle cx='8' cy='8' r='7' fill='%23E70013'/><circle cx='8' cy='8' r='5' fill='%23ffffff'/><circle cx='8' cy='8' r='3' fill='%23E70013'/></svg>">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -1396,6 +1397,122 @@ body {
     .mobile-menu-overlay.active {
         opacity: 1;
         pointer-events: all;
+    }
+}
+/* Mobile Sidebar Navigation */
+.mobile-sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 280px;
+    height: 100vh;
+    background: white;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    z-index: 1001;
+    transition: left 0.3s ease;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+.mobile-sidebar.active {
+    left: 0;
+}
+
+.mobile-sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.mobile-sidebar-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.mobile-sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 1rem;
+}
+
+.mobile-sidebar-logo {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.mobile-sidebar-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--dark);
+}
+
+.mobile-sidebar-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.mobile-sidebar-links a {
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    color: var(--dark);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.mobile-sidebar-links a:hover {
+    background: rgba(99, 102, 241, 0.1);
+    color: var(--primary);
+}
+
+.mobile-sidebar-links a i {
+    width: 20px;
+    text-align: center;
+}
+
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--dark);
+    cursor: pointer;
+}
+
+/* Show mobile toggle only on mobile */
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: block;
+    }
+    
+    .nav-links {
+        display: none;
+    }
+    
+    .mobile-sidebar-cta {
+        margin-top: 2rem;
+        padding: 1rem;
+        background: var(--gradient);
+        color: white;
+        border-radius: 8px;
+        text-align: center;
+        font-weight: 600;
     }
 }
 
@@ -2866,6 +2983,110 @@ document.addEventListener('DOMContentLoaded', function() {
         mobileMenu.classList.remove('active');
         mobileMenuOverlay.classList.remove('active');
         document.body.style.overflow = '';
+    });
+    
+    // Hide desktop nav on mobile
+    document.querySelector('.nav-links').style.display = 'none';
+});
+// Mobile sidebar functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Create mobile sidebar elements
+    const mobileSidebar = document.createElement('div');
+    mobileSidebar.className = 'mobile-sidebar';
+    
+    const mobileSidebarOverlay = document.createElement('div');
+    mobileSidebarOverlay.className = 'mobile-sidebar-overlay';
+    
+    const mobileSidebarHeader = document.createElement('div');
+    mobileSidebarHeader.className = 'mobile-sidebar-header';
+    
+    const mobileSidebarLogo = document.createElement('div');
+    mobileSidebarLogo.className = 'mobile-sidebar-logo';
+    mobileSidebarLogo.textContent = 'TunisiaWebPro';
+    
+    const mobileSidebarClose = document.createElement('button');
+    mobileSidebarClose.className = 'mobile-sidebar-close';
+    mobileSidebarClose.innerHTML = '<i class="fas fa-times"></i>';
+    
+    const mobileSidebarLinks = document.createElement('div');
+    mobileSidebarLinks.className = 'mobile-sidebar-links';
+    
+    // Create mobile menu toggle button
+    const mobileMenuToggle = document.createElement('button');
+    mobileMenuToggle.className = 'mobile-menu-toggle';
+    mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+    mobileMenuToggle.setAttribute('aria-label', 'Open menu');
+    
+    // Clone navigation links for mobile sidebar
+    const navLinks = document.querySelector('.nav-links').cloneNode(true);
+    navLinks.querySelectorAll('a').forEach(link => {
+        // Add icons to each link if needed
+        if (link.getAttribute('href') === '#home') {
+            link.innerHTML = '<i class="fas fa-home"></i> ' + link.textContent;
+        }
+        if (link.getAttribute('href') === '#services') {
+            link.innerHTML = '<i class="fas fa-laptop-code"></i> ' + link.textContent;
+        }
+        if (link.getAttribute('href') === '#portfolio') {
+            link.innerHTML = '<i class="fas fa-briefcase"></i> ' + link.textContent;
+        }
+        if (link.getAttribute('href') === '#pricing') {
+            link.innerHTML = '<i class="fas fa-tags"></i> ' + link.textContent;
+        }
+        if (link.getAttribute('href') === '#contact') {
+            link.innerHTML = '<i class="fas fa-envelope"></i> ' + link.textContent;
+        }
+    });
+    
+    // Add CTA button to mobile sidebar
+    const ctaButton = document.querySelector('.cta-button').cloneNode(true);
+    ctaButton.className = 'mobile-sidebar-cta';
+    ctaButton.innerHTML = '<i class="fas fa-paper-plane"></i> ' + ctaButton.textContent;
+    
+    mobileSidebarLinks.appendChild(navLinks);
+    
+    // Build sidebar structure
+    mobileSidebarHeader.appendChild(mobileSidebarLogo);
+    mobileSidebarHeader.appendChild(mobileSidebarClose);
+    
+    mobileSidebar.appendChild(mobileSidebarHeader);
+    mobileSidebar.appendChild(mobileSidebarLinks);
+    mobileSidebar.appendChild(ctaButton);
+    
+    // Add elements to DOM
+    document.body.appendChild(mobileSidebar);
+    document.body.appendChild(mobileSidebarOverlay);
+    
+    // Insert toggle button in header
+    const header = document.querySelector('header nav');
+    header.insertBefore(mobileMenuToggle, header.firstChild);
+    
+    // Toggle mobile sidebar
+    mobileMenuToggle.addEventListener('click', function() {
+        mobileSidebar.classList.add('active');
+        mobileSidebarOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+    
+    mobileSidebarClose.addEventListener('click', function() {
+        mobileSidebar.classList.remove('active');
+        mobileSidebarOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+    
+    mobileSidebarOverlay.addEventListener('click', function() {
+        mobileSidebar.classList.remove('active');
+        mobileSidebarOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+    
+    // Close sidebar when clicking on links
+    mobileSidebarLinks.addEventListener('click', function(e) {
+        if (e.target.tagName === 'A') {
+            mobileSidebar.classList.remove('active');
+            mobileSidebarOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
     });
     
     // Hide desktop nav on mobile
