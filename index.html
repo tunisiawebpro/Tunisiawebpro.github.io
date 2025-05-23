@@ -1230,8 +1230,6 @@ body {
     padding: 20px;
   }
 }
-
-
 /* Hide Hamburger on Desktop */
     .hamburger-menu {
         display: none;
@@ -1242,34 +1240,49 @@ body {
         color: #333; /* Adjust color */
     }
 
-    /* Mobile Styles */
+    /* Mobile Menu Styles */
+@media (max-width: 768px) {
+  .hamburger-menu {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100px;
+    left: 0;
+    width: 100%;
+    background: white;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links a {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .cta-button {
+    margin-top: 10px;
+  }
+}
     @media (max-width: 768px) {
-        .hamburger-menu {
-            display: block; /* Show hamburger */
-        }
-        .nav-links {
-            display: none; /* Hide links by default */
-            position: absolute;
-            top: 100px; /* Adjust based on header height */
-            left: 0;
-            width: 100%;
-            background: white;
-            flex-direction: column;
-            padding: 20px;
-            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-            z-index: 1000;
-        }
-        .nav-links.active {
-            display: flex; /* Show when toggled */
-        }
-        .nav-links a {
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
-        }
-        .cta-button {
-            margin-top: 10px;
-        }
-    }
+  .nav-links {
+    display: none; /* This hides it by default */
+  }
+}
+</style>
 
     </style>
 </head>
@@ -1294,10 +1307,9 @@ body {
             <span class="webpro">WEBPRO</span>
           </span>
         </div>
-        <!-- Hamburger Menu (Hidden on Desktop) -->
+<!-- Hamburger Button -->
         <button class="hamburger-menu" onclick="toggleNav()">☰</button>
-            
-            <div class="nav-links">
+            <div class="nav-links" id="navLinks">
                 <a href="#home">Home</a>
                 <a href="#services">Services</a>
                 <a href="#portfolio">Portfolio</a>
@@ -2885,9 +2897,21 @@ document.addEventListener('DOMContentLoaded', function() {
       </script>
       <script>
     function toggleNav() {
-        const navLinks = document.getElementById("navLinks");
-        navLinks.classList.toggle("active");
-    }
+  const navLinks = document.getElementById("navLinks");
+  navLinks.classList.toggle("active");
+  
+  // Toggle hamburger icon (☰ ↔ ✕)
+  const hamburger = document.querySelector(".hamburger-menu");
+  hamburger.textContent = navLinks.classList.contains("active") ? "✕" : "☰";
+}
+// Close mobile menu when a nav link is clicked
+document.querySelectorAll("#navLinks a").forEach(link => {
+  link.addEventListener("click", () => {
+    const navLinks = document.getElementById("navLinks");
+    navLinks.classList.remove("active"); // Hide menu
+    document.querySelector(".hamburger-menu").textContent = "☰"; // Reset icon
+  });
+});
 </script>
 
 </body>
