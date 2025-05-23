@@ -1301,21 +1301,22 @@ body {
     transform: translateY(-50%);
   }
 
-  /* Adjust logo positioning */
-  .logo {
-    margin-right: auto; /* Pushes logo left, hamburger right */
-  }
+  /* Add to your existing styles */
+.logo-icon {
+  display: block !important;
+  min-width: 42px;
 }
+
 @media (max-width: 768px) {
   .logo {
-    display: flex !important;
-    align-items: center;
+    gap: 8px !important;
+    padding-right: 15px; /* Prevents hamburger overlap */
   }
   .logo-icon {
-    display: block !important;
     width: 42px !important;
     height: 42px !important;
   }
+}
 }
 </style>
 </head>
