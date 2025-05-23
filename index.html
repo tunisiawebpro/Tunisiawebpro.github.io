@@ -1282,6 +1282,30 @@ body {
     display: none; /* This hides it by default */
   }
 }
+/* Mobile styles (under 768px) */
+@media (max-width: 768px) {
+  /* Hide "Get a Quote" button */
+  .cta-button {
+    display: none !important;
+  }
+
+  /* Move hamburger to right side */
+  nav {
+    position: relative;
+  }
+
+  .hamburger-menu {
+    position: absolute;
+    right: 20px; /* Adjust as needed */
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  /* Adjust logo positioning */
+  .logo {
+    margin-right: auto; /* Pushes logo left, hamburger right */
+  }
+}
 </style>
 
     </style>
