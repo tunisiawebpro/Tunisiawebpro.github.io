@@ -1006,7 +1006,7 @@
         }
         
         /* Responsive Design */
-        @media (max-width: 1024px) {
+        @media (max-width: 360px) {
             .hero-content {
                 gap: 2rem;
             }
@@ -1016,11 +1016,11 @@
             }
             
             .services-grid, .portfolio-grid, .testimonials-grid, .pricing-grid {
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
             }
         }
         
-        @media (max-width: 768px) {
+        @media (max-width: 360px) {
             .hero-content {
                 grid-template-columns: 1fr;
                 text-align: center;
@@ -1064,7 +1064,7 @@
             }
         }
         
-        @media (max-width: 480px) {
+        @media (max-width: 360px) {
             .hero-text h1 {
                 font-size: 2rem;
             }
@@ -1091,14 +1091,14 @@
                 font-size: 0.9rem;
             }
         }
-        @media (max-width: 768px) {
+        @media (max-width: 360px) {
   .header {
     flex-direction: column;
     text-align: center;
   }
 
   .form {
-    width: 100%;
+    width: 80%;
     padding: 1rem;
   }
 
@@ -1202,23 +1202,23 @@
   font-size: 2rem;
   display: block;
 }
-@media (max-width: 768px) {
+@media (max-width: 360px) {
   .column { width: 100%; }
 }
 .container {
-  width: 100%;
+  width: 90%;
   padding: 0 15px;
   box-sizing: border-box;
 }
 img {
-  max-width: 100%;
+  max-width: 70%;
   height: auto;
 }
 body {
   overflow-x: hidden;
-  width: 100%;
+  width: 120%;
 }
-@media (max-width: 768px) {
+@media (max-width: 360px) {
   .desktop-menu {
     display: none;
   }
@@ -1226,7 +1226,7 @@ body {
     display: block;
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 360px) {
   .navigation {
     flex-direction: column;
   }
@@ -1235,14 +1235,14 @@ body {
     font-size: 1.2em;
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 360px) {
   .navbar {
     flex-direction: column;
     align-items: center;
   }
 
   .section {
-    padding: 20px;
+    padding: 30px;
   }
 }
 /* Hide Hamburger on Desktop */
@@ -1256,7 +1256,7 @@ body {
     }
 
     /* Mobile Menu Styles */
-@media (max-width: 768px) {
+@media (max-width: 360px) {
   .hamburger-menu {
     display: block;
     background: none;
@@ -1269,12 +1269,12 @@ body {
   .nav-links {
     display: none;
     position: absolute;
-    top: 100px;
+    top: 80px;
     left: 0;
-    width: 100%;
+    width: 80%;
     background: white;
     flex-direction: column;
-    padding: 20px;
+    padding: 10px;
     box-shadow: 0 5px 10px rgba(0,0,0,0.1);
     z-index: 1000;
   }
@@ -1292,17 +1292,18 @@ body {
     margin-top: 10px;
   }
 }
-    @media (max-width: 768px) {
+    @media (max-width: 360px) {
   .nav-links {
     display: none; /* This hides it by default */
   }
 }
 /* Mobile styles (under 768px) */
-@media (max-width: 768px) {
+@media (max-width: 360px){
   /* Hide "Get a Quote" button */
   .cta-button {
     display: none !important;
   }
+}
 
   /* Move hamburger to right side */
   nav {
@@ -1316,22 +1317,95 @@ body {
     transform: translateY(-50%);
   }
 
-  /* Add to your existing styles */
-.logo-icon {
-  display: block !important;
-  min-width: 42px;
-}
+  
 
-@media (max-width: 768px) {
-  .logo {
-    gap: 8px !important;
-    padding-right: 15px; /* Prevents hamburger overlap */
-  }
-  .logo-icon {
-    width: 42px !important;
-    height: 42px !important;
-  }
+@media screen and (max-width: 360px) and (min-aspect-ratio: 9/16) {
+    body {
+        font-size: 14px;
+    }
+    
+    .hero {
+        min-height: 90vh;
+        padding: 0 1rem;
+    }
+    
+    .hero-text h1 {
+        font-size: 1.8rem;
+        line-height: 1.3;
+    }
+    
+    .hero-text p {
+        font-size: 1rem;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+    }
+    
+    .service-card, .portfolio-item, .testimonial-card, .pricing-card {
+        width: 80%;
+        margin-bottom: 1.5rem;
+    }
+    
+    .contact-container {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+    
+    /* Adjust font sizes for better readability */
+    h2 {
+        font-size: 1.5rem !important;
+    }
+    
+    /* Make sure nothing overflows horizontally */
+    html, body {
+        overflow-x: hidden;
+        width: 100%;
+    }
+    
+    /* Adjust padding/margins to use vertical space better */
+    section {
+        padding: 3rem 1rem !important;
+    }
 }
+@media (max-width: 360px) {
+    .nav-links {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80%;
+        height: 100vh;
+        background: white;
+        flex-direction: column;
+        padding: 2rem;
+        transition: all 0.3s ease;
+        z-index: 1000;
+    }
+    
+    .nav-links.active {
+        left: 0;
+    }
+    
+    .nav-links a {
+        padding: 1rem 0;
+        border-bottom: 1px solid #eee;
+    }
+    
+    /* Add overlay when menu is open */
+    .nav-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 999;
+        display: none;
+    }
+    
+    .nav-overlay.active {
+        display: block;
+    }
 }
 </style>
 </head>
@@ -1677,7 +1751,7 @@ body {
               <i class="fab fa-cc-paypal" style="color:#003087;"></i> PayPal
             </div>
             <div style="background:#f1f5f9; padding:0.4rem 0.8rem; border-radius:20px; font-size:0.8rem; display:flex; align-items:center; gap:0.3rem;">
-              <i class="fab fa-cc-stripe" style="color:#6772e5;"></i> D17
+              <i class="fab fa-cc-stripe" style="color:#b4badd;"></i> D17
             </div>
             <div style="background:#f1f5f9; padding:0.4rem 0.8rem; border-radius:20px; font-size:0.8rem; display:flex; align-items:center; gap:0.3rem;">
               <i class="fas fa-university" style="color:#E70013;"></i> Bank Transfer
