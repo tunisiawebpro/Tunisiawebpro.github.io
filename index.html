@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>TunisiaWebPro - Professional Web Design</title>
     <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHJ4PSI2IiBmaWxsPSIjRTcwMDEzIi8+CiAgPHJlY3QgeD0iOCIgeT0iOCIgd2lkdGg9IjE2IiBoZWlnaHQ9IjQiIGZpbGw9IndoaXRlIi8+CiAgPHJlY3QgeD0iMTIiIHk9IjEyIiB3aWR0aD0iOCIgaGVpZ2h0PSIxMiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+" type="image/svg+xml">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -2727,16 +2727,19 @@ body {
                 </div>
             </div>
             <div class="footer-col">
-                <h3>Newsletter</h3>
-                <p>Subscribe to get updates on web design trends and special offers.</p>
-                    <form class="newsletter-form" action="https://formsubmit.co/amen.ammar123456789@gmail.com" method="POST">
-                        <input type="hidden" name="_subject" value="TEST Submission">
-                        <input type="email" id="newsletter-email" name="email" placeholder="Your Email" required>
-                        <form id="newsletter-form" class="newsletter-form">
-                            <button type="submit">
-                                Subscribe<i class="fas fa-paper-plane"></i>
-                            </button>
-                    </form>
+  <h3>Newsletter</h3>
+  <p>Subscribe to get updates on web design trends and special offers.</p>
+
+  <form class="newsletter-form" action="https://formsubmit.co/amen.ammar123456789@gmail.com" method="POST">
+    <input type="hidden" name="_subject" value="TEST Submission">
+    <input type="hidden" name="_next" value="https://tunisiawebpro.github.io//thank-you.html"> <!-- Change this to your real domain -->
+    
+    <input type="email" id="newsletter-email" name="email" placeholder="Your Email" required>
+    
+    <button type="submit">
+      Subscribe <i class="fas fa-paper-plane"></i>
+    </button>
+  </form>
                     <p style="font-size:0.7rem; color:#94a3b8; margin-top:0.5rem;">
                         We respect your privacy. See our <a href="privacy-policy.html" style="color:#94a3b8;">Policy</a>
                     </p>
@@ -2996,7 +2999,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('.nav-links').style.display = 'none';
 });
     </script>
-    
+
       <style>
         .terms-banner {
           position: fixed;
