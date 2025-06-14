@@ -2151,13 +2151,25 @@ html {
       <input type="text" id="name" name="name" required>
     </div>
                     <div class="form-group">
-                        <label for="email">Email address*</label>
-                        <input type="email" id="email" name="email" required>
+    <label for="email">Email Address*</label>
+    <input type="email" id="email" name="email"
+           pattern="[a-zA-Z0-9._%+-]+@gmail\.com$"
+           title="Only Gmail addresses are accepted (e.g., example@gmail.com)"
+           onkeydown="return allowGmailChars(event)"
+           oninput="validateGmail(this)"
+           placeholder="example@gmail.com"
+           required>
                     </div>
                     <div class="form-group">
-                        <label for="phone">Phone (WhatsApp preferred)</label>
-                        <input type="tel" id="phone" name="phone">
-                    </div>
+    <label for="phone">Phone Number*</label>
+    <input type="tel" id="phone" name="phone" 
+           onkeydown="return (event.key !== ' ' && event.key !== 'e' && event.key !== '-' && event.key !== '.');"
+           oninput="formatPhoneInput(this)"
+           pattern="^\+[0-9]{1,3}[0-9]{4,14}$"
+           title="Please enter a valid international phone number (e.g., +21612345678)"
+           placeholder="+21612345678"
+           required>
+</div>
                     <div class="form-navigation">
                         <button type="button" class="next-btn">Next <i class="fas fa-arrow-right"></i></button>
                     </div>
@@ -2340,6 +2352,99 @@ html {
          }
             });
      </script>
+     <script>
+    // International phone validation
+    function formatPhoneInput(input) {
+    // Remove all non-digit/non-plus characters
+    let value = input.value.replace(/[^0-9+]/g, '');
+    
+    // Ensure plus is only at start
+    if (value.length > 1 && value.indexOf('+') > 0) {
+        value = value.replace(/\+/g, '');
+        value = '+' + value;
+    }
+    
+    // Limit to one plus
+    if ((value.match(/\+/g) || []).length > 1) {
+        value = value.replace(/\+/g, '');
+        value = '+' + value;
+    }
+    
+    // Limit length (17 chars max: + plus 16 digits)
+    if (value.length > 17) {
+        value = value.substring(0, 17);
+    }
+    
+    input.value = value;
+}
+
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    const phone = document.getElementById('phone').value;
+    const phoneRegex = /^\+\d{1,3}\d{4,14}$/;
+    
+    if (!phoneRegex.test(phone)) {
+        e.preventDefault();
+        document.getElementById('phone').classList.add('invalid');
+        alert('Please enter a valid international phone number starting with country code (e.g., +21612345678)');
+        document.getElementById('phone').focus();
+        return;
+    }
+});
+// Only allow characters valid in Gmail addresses
+function allowGmailChars(event) {
+    const allowedChars = /[a-zA-Z0-9._%+-@]/;
+    return allowedChars.test(event.key) || 
+           event.key === 'Backspace' || 
+           event.key === 'Delete' ||
+           event.key === 'ArrowLeft' ||
+           event.key === 'ArrowRight';
+}
+
+function validateGmail(input) {
+    let value = input.value;
+    
+    // Remove any characters that aren't allowed in Gmail addresses
+    value = value.replace(/[^a-zA-Z0-9._%+-@]/g, '');
+    
+    // If user tries to type a domain other than gmail.com
+    if (value.includes('@') && !value.endsWith('@gmail.com')) {
+        const atIndex = value.indexOf('@');
+        const domainPart = value.substring(atIndex);
+        
+        // If they're trying to type another domain
+        if (domainPart.match(/@[a-zA-Z0-9-]+\.?[a-zA-Z0-9-]*$/)) {
+            value = value.substring(0, atIndex) + '@gmail.com';
+        }
+    }
+    
+    input.value = value;
+    
+    // Visual feedback
+    if (value && !value.endsWith('@gmail.com')) {
+        input.classList.add('invalid');
+    } else {
+        input.classList.remove('invalid');
+    }
+}
+
+// Form submission validation
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    const email = document.getElementById('email').value;
+    const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+    
+    if (!gmailRegex.test(email)) {
+        e.preventDefault();
+        document.getElementById('email').classList.add('invalid-shake');
+        alert('Only Gmail addresses are accepted (e.g., example@gmail.com)');
+        document.getElementById('email').focus();
+        
+        setTimeout(() => {
+            document.getElementById('email').classList.remove('invalid-shake');
+        }, 500);
+        return;
+    }
+});
+</script>
  
 <style>
     /* Contact Section Styles */
